@@ -1,26 +1,166 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── SyncBuds Design System — Bold, Minimal, Human ──────────── */
+/* Khosla Ventures style: white base + bold typography + rainbow watercolor accents */
+@theme {
+  /* Colors — pure white base, deep navy/purple-black text, minimal grays */
+  --color-bg:      #FAFBFC;  /* Closer to white */
+  --color-surface: #FFFFFF;
+  --color-text:    #1A1625;  /* Deep purple-black instead of pure black */
+  --color-accent:  #1A1625;
+  --color-sub:     #5F5A6B;  /* Slightly more purple in grays */
+  --color-border:  #EBEBF0;  /* Refined border */
+
+  /* Rainbow watercolor accents — 5-10% of site, used as diffuse washes/highlights */
+  --color-wc-magenta: #E8518A;
+  --color-wc-blue:    #3B7DD8;
+  --color-wc-yellow:  #E8C94A;
+  --color-wc-violet:  #8B5FBF;
+
+  /* Typography — Noto Sans JP, bold and sophisticated */
+  --font-sans:  var(--font-noto-sans-jp), 'Helvetica Neue', sans-serif;
+  --font-serif: var(--font-noto-sans-jp), 'Helvetica Neue', sans-serif;
+  --font-display: var(--font-noto-sans-jp), 'Helvetica Neue', sans-serif;
+  --font-instrument: var(--font-noto-sans-jp), 'Helvetica Neue', sans-serif;
+
+  /* Spacing — Generous whitespace, Khosla-inspired */
+  --spacing-section: 7rem;
+  --spacing-section-lg: 10rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ───────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAFBFC;
+  color: #1A1625;
+  font-family: var(--font-noto-sans-jp), 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Proportional kana/punctuation kerning + ligatures (pro JP typography) */
+  font-feature-settings: "palt" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0;
 }
+
+/* ─── Typography helpers — Bold, Sophisticated ─────────────────────────────── */
+/* Hero: massive, bold, commanding presence */
+.text-hero {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-feature-settings: "palt" 1;
+  text-wrap: balance;
+}
+
+/* Stats: light weight for contrast, large scale */
+.text-stat-num {
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-family: var(--font-sans);
+  font-weight: 200;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+/* Section titles: bold and clear */
+.text-section-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-feature-settings: "palt" 1;
+  text-wrap: balance;
+}
+
+/* Page titles: responsive scaling between mobile and desktop */
+.text-page-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-feature-settings: "palt" 1;
+  text-wrap: balance;
+}
+
+/* Sub-headings within pages */
+.text-sub-heading {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* English display text: refined and modern */
+.text-display-en {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Button base — deep navy fill, rainbow hover hint ──── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2.25rem;
+  background: #1A1625;
+  color: #FFFFFF;
+  font-weight: 500;
+  border-radius: 9999px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background: #2A2438;
+  box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.12);
+}
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2.25rem;
+  background: transparent;
+  color: #1A1625;
+  font-weight: 500;
+  border: 1.5px solid #1A1625;
+  border-radius: 9999px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+.btn-outline:hover {
+  background: #1A1625;
+  color: #FFFFFF;
+}
+.btn-outline:active { transform: scale(0.97); }
+
+/* ─── Animations ────────────────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #FAFBFC; }
+::-webkit-scrollbar-thumb { background: #D5D0DC; border-radius: 2px; }

@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "title": "SyncBuds — 挑戦には、仲間がいる。",
+    "description": "バンクーバー発。日本人の海外挑戦を支えるNPO。"
+  },
+  "nav": {
+    "programs": "活動を見る",
+    "stories": "ストーリー",
+    "blog": "ブログ",
+    "join": "参加する"
+  },
+  "hero": {
+    "en_sub": "Challengers don't go alone.",
+    "headline_line1": "挑戦には、",
+    "headline_line2": "仲間がいる。",
+    "sub": "バンクーバー発。日本人の海外挑戦を支えるNPO。",
+    "cta_primary": "参加する",
+    "cta_secondary": "活動を見る"
+  },
+  "stats": [
+    { "num": "6", "label": "期生" },
+    { "num": "120名+", "label": "累計参加メンバー" },
+    { "num": "Vancouver", "label": "バンクーバー発のNPO" }
+  ],
+  "mvv": {
+    "mission_label": "Mission",
+    "mission": "挑戦に伴走し、挑戦機会を生み出し続ける。",
+    "vision_label": "Vision",
+    "vision": "挑戦者を生み出す永久機関をつくる。"
+  },
+  "final_cta": {
+    "headline_line1": "挑戦を、",
+    "headline_line2": "始めよう。",
+    "sub": "まずは話を聞くだけでも大丈夫です。",
+    "cta": "参加する"
+  },
+  "footer": {
+    "tagline": "バンクーバー発。\n日本人の海外挑戦を支えるNPO。",
+    "legal": "BC Registered NPO\n© 2026 SyncBuds Marketing Association"
+  }
+}
