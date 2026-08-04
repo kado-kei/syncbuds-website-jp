@@ -5,8 +5,6 @@ const footerLinks = [
     title: "SyncBuds",
     links: [
       { label: "About", href: "/about" },
-      { label: "Stories", href: "/stories" },
-      { label: "Reports", href: "/reports" },
       { label: "Partners", href: "/partners" },
       { label: "Join", href: "/join" },
       { label: "Contact", href: "/contact" },
@@ -45,8 +43,9 @@ export default function Footer() {
               日本人の海外挑戦を支える組織。
             </p>
             <p className="mt-6 text-xs text-sub/60 leading-relaxed">
-              BC Registered Organization<br />
-              Registered in British Columbia, Canada<br />
+              SyncBuds Marketing Association<br />
+              カナダ・BC州登録の非営利団体<br />
+              Vancouver, British Columbia, Canada<br />
               © 2026 SyncBuds Marketing Association
             </p>
           </div>

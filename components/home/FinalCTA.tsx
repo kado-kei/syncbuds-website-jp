@@ -4,7 +4,7 @@ export default function FinalCTA() {
   return (
     <section className="py-[var(--spacing-section-lg)] bg-surface">
       <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
-        <h2 className="text-page-title text-text mb-8">
+        <h2 className="text-page-title jp-fit [--chars:5] text-text mb-8">
           挑戦を、
           <br />
           始めよう。

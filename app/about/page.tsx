@@ -15,7 +15,7 @@ export default function AboutPage() {
       <main className="pt-44 pb-40">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
           <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">About</p>
-          <h1 className="text-page-title text-text mb-10">
+          <h1 className="text-page-title jp-fit [--chars:7] text-text mb-10">
             挑戦の連鎖を、
             <br />
             作り続ける。
@@ -28,7 +28,7 @@ export default function AboutPage() {
             <div className="space-y-6 text-text/85 text-lg md:text-xl leading-relaxed">
               <p>
                 バンクーバー発。海外で挑戦する日本の若者が、情報格差や孤立に苦しまずに済むように。
-                <span className="font-semibold">Impact-driven talentをエンパワーするコミュニティ</span>です。
+                <span className="font-semibold">自分から動く人が、動きやすくなる場所</span>をつくっています。
               </p>
               <p>
                 留学生・Co-op生・若手社会人が、メディア運営・イベント企画・Web制作・営業など
@@ -46,7 +46,7 @@ export default function AboutPage() {
                 <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
                   Mission
                 </p>
-                <p className="text-sub-heading text-text leading-tight">
+                <p className="text-sub-heading jp-fit [--chars:13] text-text leading-tight">
                   挑戦に伴走し、
                   <br />
                   挑戦機会を生み出し続ける。
@@ -57,7 +57,7 @@ export default function AboutPage() {
                 <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
                   Vision
                 </p>
-                <p className="text-sub-heading text-text leading-tight">
+                <p className="text-sub-heading jp-fit [--chars:9] text-text leading-tight">
                   挑戦者を生み出す
                   <br />
                   永久機関をつくる。
@@ -82,7 +82,7 @@ export default function AboutPage() {
 
             <div className="relative aspect-[3/4] max-w-xs mx-auto rounded-2xl overflow-hidden bg-surface mb-12">
               <Image
-                src="/images/founder/kei-portrait.png"
+                src="/images/founder/kei-portrait.jpg"
                 alt="Kei Kadowaki — Founder"
                 fill
                 className="object-cover object-top"
@@ -125,13 +125,14 @@ export default function AboutPage() {
             </h2>
             <div className="grid grid-cols-3 gap-10 text-center">
               {[
-                { num: "6", label: "期生" },
-                { num: "120+", label: "累計参加メンバー" },
-                { num: "Vancouver", label: "拠点" },
+                { num: "6", label: "期", note: "立ち上げからの期数" },
+                { num: "120+", label: "累計参加メンバー", note: "設立からの延べ人数" },
+                { num: "Vancouver", label: "拠点", note: "British Columbia" },
               ].map((s) => (
                 <div key={s.label}>
                   <span className="text-stat-num text-text">{s.num}</span>
                   <p className="mt-3 text-xs text-sub tracking-[0.2em] uppercase">{s.label}</p>
+                  <p className="mt-2 text-xs text-sub/60">{s.note}</p>
                 </div>
               ))}
             </div>
@@ -152,7 +153,7 @@ export default function AboutPage() {
                 ["開拓してから、手渡す", "受け取ったまま渡すのではなく、自分が拓いた地点を積み上げてから渡す。"],
                 ["機会の不平等に向き合う", "環境のせいで諦める若者を、少しずつ減らしていく。"],
                 ["数より深さ", "1人の挑戦者の物語の濃さが、次の100人を呼び込む。"],
-                ["本気で関わる人だけが、運営になる", "適当に続ける場所ではない。本気の人が本気でいられるために、関わり方の階層を明確にする。"],
+                ["本気で関わる人だけが、運営になる", "適当に続ける場所ではない。本気の人が本気でいられるために、役割と責任の範囲を明確にする。人の上下をつくるという意味ではない。"],
               ].map(([title, desc], i) => (
                 <li key={i} className="flex gap-8 items-start">
                   <span className="font-sans text-3xl text-text font-extralight w-10 flex-shrink-0">
@@ -178,11 +179,11 @@ export default function AboutPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">
                 {[
-                  { name: "Vancouver Osusume", desc: "メディアプラットフォーム＆タレント育成" },
-                  { name: "Ryugaku+", desc: "就職プレイスフォーム（スケーリング事業）" },
-                  { name: "Ecosystem PR", desc: "組織発信＆採用広報" },
-                  { name: "Sponsors / Sales", desc: "パートナーシップ＆収益基盤" },
-                  { name: "Engagement", desc: "メンバー開発＆1on1サポート" },
+                  { name: "Vancouver Osusume", desc: "現地情報の発信と、メンバーが実践を積む場" },
+                  { name: "Ryugaku+", desc: "留学生向けプラットフォームの開発・運営" },
+                  { name: "Ecosystem PR", desc: "組織としての発信（X / LinkedIn / note）" },
+                  { name: "Sponsors / Sales", desc: "スポンサー獲得と、活動を続けるための収益" },
+                  { name: "Engagement", desc: "新メンバーのオンボーディングと1on1" },
                 ].map((team) => (
                   <div
                     key={team.name}
@@ -200,11 +201,37 @@ export default function AboutPage() {
             <h2 className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
               Registration
             </h2>
-            <div className="text-base text-sub leading-relaxed space-y-2">
-              <p>SyncBuds Marketing Association</p>
-              <p>Registered in British Columbia, Canada</p>
-              <p>Vancouver, BC</p>
-            </div>
+            <dl className="text-base text-sub leading-relaxed grid grid-cols-1 sm:grid-cols-[9rem_1fr] gap-x-8 gap-y-3">
+              <dt className="text-sub/70">正式名称</dt>
+              <dd className="text-text/85 mb-2 sm:mb-0">SyncBuds Marketing Association</dd>
+
+              <dt className="text-sub/70">法人格</dt>
+              <dd className="text-text/85 mb-2 sm:mb-0">
+                カナダ・ブリティッシュコロンビア州登録の非営利団体
+              </dd>
+
+              <dt className="text-sub/70">所在地</dt>
+              <dd className="text-text/85 mb-2 sm:mb-0">Vancouver, British Columbia, Canada</dd>
+
+              <dt className="text-sub/70">代表</dt>
+              <dd className="text-text/85 mb-2 sm:mb-0">Kei Kadowaki（門脇 慶）</dd>
+
+              <dt className="text-sub/70">活動領域</dt>
+              <dd className="text-text/85 mb-2 sm:mb-0">
+                現地情報メディアの運営、コミュニティイベントの企画・運営、
+                留学生向けプラットフォームの開発、企業との共催・スポンサーシップ
+              </dd>
+
+              <dt className="text-sub/70">連絡先</dt>
+              <dd className="text-text/85">
+                <a
+                  href="mailto:keikadowaki@syncbuds.ca"
+                  className="underline underline-offset-4 hover:text-text transition-colors"
+                >
+                  keikadowaki@syncbuds.ca
+                </a>
+              </dd>
+            </dl>
           </section>
         </div>
       </main>

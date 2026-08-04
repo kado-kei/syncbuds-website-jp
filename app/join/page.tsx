@@ -13,27 +13,27 @@ const teams = [
   {
     name: "Vancouver Osusume IG",
     desc: "Instagramで現地情報を発信。写真・動画・コンテンツ制作のスキルが身につく。",
-    impact: "1,000sの日本人がバンクーバーを発見し、自信を育むきっかけを作る。",
+    impact: "来たばかりの人が、最初の一歩を踏み出すきっかけをつくる。",
   },
   {
     name: "Vancouver Osusume WEB",
     desc: "公式サイトの企画・制作・運用。Web制作・デザインの実践経験を積める。",
-    impact: "搾取的ブローカーを置き換える、信頼できるプラットフォームを構築する。",
+    impact: "信頼できる情報に、誰でもたどり着ける場所をつくる。",
   },
   {
     name: "Engagement",
     desc: "イベント企画・コミュニティ運営・新メンバーのオンボーディング。人をつなぐ役割。",
-    impact: "早期にタレントを発見し、あなたがメンター。SyncBudsを5倍に拡大させる。",
+    impact: "新しく入った人が、ひとりで悩まずに始められる状態をつくる。",
   },
   {
     name: "Sponsors / Sales",
     desc: "スポンサー企業との連携・営業。ビジネス開発・商談の実践ができる。",
-    impact: "この社会的活動を永続させる収益基盤を生成する。",
+    impact: "活動を続けられるだけの収益をつくり、次の期に手渡す。",
   },
   {
     name: "Ryugaku+",
     desc: "留学生向けプラットフォームの開発・運営。エンジニアリング・プロダクト開発に参加。",
-    impact: "搾取を防ぐシステムをエンジニアリング。数千人の未来を変える。",
+    impact: "情報がないせいで損をする人を、ひとりずつ減らしていく。",
   },
 ];
 
@@ -44,14 +44,14 @@ const benefits = [
     meta: "Web・コンテンツ・ビジネス開発のスキル獲得",
   },
   {
-    title: "Co-creator の経験",
-    desc: "支援/被支援の関係ではなく、対等な co-creator として働く。",
-    meta: "Principle 4: 全員が挑戦者",
+    title: "つくる側に立つ経験",
+    desc: "支援する / されるの関係ではなく、対等な作り手として動く。",
+    meta: "原則4「全員が挑戦者」",
   },
   {
-    title: "コンパウンド・インパクト",
-    desc: "1期メンバーは2期・3期を導く側に。あなたが育てた人が100倍のネットワークを作る。",
-    meta: "帰国後も、あなたは「源」となり続ける",
+    title: "次に渡していく関係",
+    desc: "前の期のメンバーが今のメンバーを支えている。あなたも次の期に手渡す側になる。",
+    meta: "帰国したあとも、つながりは続く",
   },
 ];
 
@@ -78,11 +78,11 @@ const faqs = [
   },
   {
     q: "他のコミュニティと何が違いますか？",
-    a: "私たちは「支援する側」「支援される側」という階層を作りません。全員が対等な co-creator です。あなたは受け身ではなく、主体的に価値を生み出す側に立ちます。",
+    a: "私たちは「支援する側」「支援される側」という階層を作りません。全員が対等な作り手です。用意されたものを受け取るのではなく、一緒に次の機会をつくる側に立ちます。",
   },
   {
     q: "SyncBuds卒業後はどうなりますか？",
-    a: "サポートは続きます。1期のメンバーは今、2期・3期をメンターしています。卒業後もあなたは「源」となり、次の世代を導く側に立ちます。それが私たちのモデルです。",
+    a: "つながりは続きます。前の期のメンバーが、今の期のメンバーの相談に乗っています。卒業したあとも、次の期に何かを手渡す側でいられる。それが私たちのモデルです。",
   },
 ];
 
@@ -93,13 +93,13 @@ export default function JoinPage() {
       <main className="pt-44 pb-40">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
           <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">Join</p>
-          <h1 className="text-page-title text-text mb-10">
-            社会的不平等を解く。
+          <h1 className="text-page-title jp-fit [--chars:12] text-text mb-10">
+            機会の差を、埋めていく。
             <br />
-            次に続く人のキャリアを作る。
+            次に続く人の道をつくる。
           </h1>
           <p className="text-sub text-xl leading-relaxed mb-28">
-            あなたは「支援される側」ではなく、次の人を導く側に立ちます。
+            誰かに用意された機会を受け取るのではなく、仲間と一緒に次の機会をつくる側に立ちます。
             <br />
             完璧じゃなくていい。失敗してもいい。
             「本気でやろうとしている」その姿勢だけ、持ってきてください。
@@ -192,8 +192,8 @@ export default function JoinPage() {
             <div className="space-y-5 text-text/85 text-lg leading-relaxed">
               <p>週5〜10時間程度の活動を想定しています。フルタイムの仕事・学業との両立が可能です。</p>
               <p>特別なスキルや経験は不要。<span className="font-semibold">本気で取り組む意欲</span>があれば、どなたでも歓迎します。</p>
-              <p>ただし、私たちは慎重です。ミッション・価値観・コミットメントについて、実装テストと面接で確認させてください。</p>
-              <p>活動期間は原則1期（約6ヶ月）。継続参加も可能です。月4-5ヶ月で leadership role への昇進が一般的です。</p>
+              <p>ただし、私たちは慎重です。ミッション・価値観・コミットメントについて、実務テストと面接で確認させてください。</p>
+              <p>活動期間は原則1期（約6ヶ月）。継続参加も可能です。</p>
             </div>
           </section>
 
@@ -208,7 +208,7 @@ export default function JoinPage() {
               {[
                 { step: "01", title: "応募フォームを提出", desc: "なぜ SyncBuds か、何をやりたいのか、教えてください。3〜5分で完了します。" },
                 { step: "02", title: "1次面接（オンライン）", desc: "ミッション・価値観・コミットメント。SyncBuds への適合度を確認します。実務テストもあります。" },
-                { step: "03", title: "チームオンボーディング", desc: "チームに合流。小さく始めて、徐々に ownership を深めます。" },
+                { step: "03", title: "チームオンボーディング", desc: "チームに合流。小さく始めて、少しずつ任される範囲を広げていきます。" },
               ].map((s) => (
                 <div key={s.step} className="flex gap-8 items-start">
                   <span className="font-sans text-4xl text-text font-extralight w-12 flex-shrink-0">{s.step}</span>
@@ -240,20 +240,16 @@ export default function JoinPage() {
 
           <section className="text-center pt-16 border-t border-border">
             <h3 className="text-section-title text-text mb-6">
-              社会的インパクトを、始めよう。
+              ここから、始めよう。
             </h3>
             <p className="text-sub text-lg mb-12 leading-relaxed">
               まずは話を聞くだけでも大丈夫です。
               <br />
               本気で関わる準備ができたら、ここから始めましょう。
             </p>
-            <Link
-              href="https://form.typeform.com/to/syncbuds"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-xl !px-12 !py-6"
-            >
-              Join Us <span className="text-xl">→</span>
+            {/* カテゴリを「メンバーとして参加したい」で開く */}
+            <Link href="/contact?type=join#form" className="btn-primary text-xl !px-12 !py-6">
+              応募する <span className="text-xl">→</span>
             </Link>
           </section>
         </div>

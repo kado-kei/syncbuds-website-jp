@@ -54,7 +54,7 @@ body {
   line-height: 1.1;
   letter-spacing: -0.03em;
   font-feature-settings: "palt" 1;
-  text-wrap: balance;
+  --jp-fit-max: 4.25rem;
 }
 
 /* Stats: light weight for contrast, large scale */
@@ -75,6 +75,7 @@ body {
   letter-spacing: -0.02em;
   font-feature-settings: "palt" 1;
   text-wrap: balance;
+  --jp-fit-max: 2.75rem;
 }
 
 /* Page titles: responsive scaling between mobile and desktop */
@@ -85,7 +86,7 @@ body {
   line-height: 1.1;
   letter-spacing: -0.03em;
   font-feature-settings: "palt" 1;
-  text-wrap: balance;
+  --jp-fit-max: 3.5rem;
 }
 
 /* Sub-headings within pages */
@@ -95,6 +96,37 @@ body {
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
+  --jp-fit-max: 1.75rem;
+  /* letter-spacing が他の見出しより緩い分、1文字が広い */
+  --jp-fit-em: 0.98;
+}
+
+/* ─── 日本語見出しの改行制御 ─────────────────────────────
+   <br /> で指定した改行位置を、どの画面幅でも維持する。
+
+   仕組み: 最長行が1行に収まる font-size の上限を、コンテナの
+   実幅（100cqi）から逆算する。vw ではなくコンテナ基準にすることで、
+   px-6 → md:px-12 のようにパディングが跳ねる箇所でも自動追従する。
+
+   使い方: 見出しに .jp-fit と [--chars:N] を付ける。
+   N は「最長行の文字数」。コピーを変えたらこの数値だけ更新する。
+   半角英数字が混じる行は、全角換算で数える（例「3,000+の」→ 約5文字）。
+
+   --jp-fit-em は1文字あたりの平均送り幅（em）。palt と letter-spacing の
+   効き方でクラスごとに変わるため、実測値に安全率を乗せてクラス側で持つ。
+   実測: letter-spacing -0.03em の見出しは 0.88〜0.91em/字、-0.01em は約0.93em/字。
+   既定値は実測の最大に約5%の安全率を乗せてある。 */
+:is(div, section, header, main):has(> .jp-fit) {
+  container-type: inline-size;
+}
+
+.jp-fit {
+  font-size: min(
+    var(--jp-fit-max, 3.5rem),
+    100cqi / (var(--chars, 12) * var(--jp-fit-em, 0.95))
+  );
+  /* balance は <br /> の意図を無視して行を再配分するので打ち消す */
+  text-wrap: wrap;
 }
 
 /* English display text: refined and modern */

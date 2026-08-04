@@ -17,9 +17,11 @@ export default function Hero() {
         className="absolute bottom-32 -left-32 w-[350px] h-[350px]"
       />
 
-      <div className="max-w-4xl mx-auto px-6 md:px-12 text-center pt-40 pb-24">
+      {/* w-full 必須: 親が flex のため、これが無いと内容依存幅になり
+          見出しのコンテナクエリ（.jp-fit）が正しい幅を取れない */}
+      <div className="w-full max-w-4xl mx-auto px-6 md:px-12 text-center pt-40 pb-24">
         <div className="animate-fade-up">
-          <h1 className="text-hero text-text mb-8">
+          <h1 className="text-hero jp-fit [--chars:12] text-text mb-8">
             海外で挑戦する若者に、
             <br />
             実践機会と仲間を届ける。
@@ -36,7 +38,7 @@ export default function Hero() {
 
         <div className="animate-fade-up [animation-delay:400ms]">
           <p className="text-xs text-sub/60 tracking-[0.25em] uppercase mb-16">
-            6期 / 累計120名以上参加 / Vancouver拠点
+            6期 / 累計参加メンバー120名以上 / Vancouver拠点
           </p>
         </div>
 

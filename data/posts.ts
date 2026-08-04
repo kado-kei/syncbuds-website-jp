@@ -15,6 +15,7 @@ export interface Post {
   date: string;
 }
 
+// /reports ルートを作るまで未使用。実際にあった出来事だけを入れること。
 export const posts: Post[] = [
   {
     slug: "career-seminar-vol1",
@@ -24,15 +25,6 @@ export const posts: Post[] = [
       "グローバル人材紹介企業Robert Waltersと共催。海外経験を仕事に変えるキャリアセミナー。",
     body: "2026年6月、SyncBudsはRobert Walters Japanと共催で、キャリアセミナー「海外経験を、仕事に変える。」を開催しました。バンクーバーで挑戦する日本人の若者が、海外で得た経験をどうキャリアにつなげるかを語り合いました。SyncBudsは企画・集客・当日運営を担い、Robert Waltersからはキャリアコンサルタントが登壇。参加者にはグローバル就職の実践的なアドバイスが提供されました。今後も定期的な共催を計画しています。",
     date: "2026-06-08",
-  },
-  {
-    slug: "member-story-yuki",
-    category: "Member Story",
-    title: "孤独な3ヶ月目を救ったもの — Yukiのストーリー",
-    excerpt:
-      "ワーホリで来加し、現地エンジニアへ。一番きつかった時期に支えになったのは、仲間の存在だった。",
-    body: "ワーキングホリデーでバンクーバーに来たYuki。最初の3ヶ月は、情報も繋がりもなく、孤独な日々だった。そんなとき出会ったのがSyncBudsの仲間たち。「一緒にいる」と感じられる場所が、彼を次の一歩へと押し出した。",
-    date: "2026-06-05",
   },
   {
     slug: "ryugaku-plus-beta",

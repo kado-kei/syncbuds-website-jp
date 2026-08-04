@@ -1,0 +1,15 @@
+{
+  "//": "Cloudflare Pages Functions 用。Next のビルド（../tsconfig.json）からは除外している。",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "WebWorker"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": []
+  },
+  "include": ["**/*.ts"]
+}

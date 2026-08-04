@@ -5,6 +5,9 @@ import { featuredMembers } from "@/data/members";
 const stories = featuredMembers;
 
 export default function Stories() {
+  // 掲載同意が取れたメンバーがまだ居ない間は、セクションごと出さない
+  if (stories.length === 0) return null;
+
   return (
     <section className="py-[var(--spacing-section-lg)] bg-surface">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -37,14 +40,14 @@ export default function Stories() {
                 <div className="relative w-12 h-12 rounded-full overflow-hidden bg-surface flex-shrink-0">
                   <Image
                     src={story.photo}
-                    alt={story.name}
+                    alt={story.displayName}
                     fill
                     className="object-cover object-top"
                     unoptimized
                   />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-text">{story.name}</p>
+                  <p className="text-sm font-medium text-text">{story.displayName}</p>
                   <p className="text-xs text-sub">{story.role}</p>
                 </div>
                 <span className="text-sub group-hover:text-text group-hover:translate-x-1 transition-all">→</span>

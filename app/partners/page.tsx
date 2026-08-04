@@ -30,27 +30,28 @@ const partnerTypes = [
   {
     title: "共催イベント",
     description:
-      "キャリアセミナー・ワークショップ・交流イベントを共同で企画・開催。厳選された若者との直接的な接点を持てます。",
+      "キャリアセミナー・ワークショップ・交流イベントを共同で企画・開催。海外で挑戦している若手と、直接話せる場をつくります。",
   },
   {
     title: "スポンサーシップ / PR",
     description:
-      "メディア（Instagram / Web / note）を通じた採用広報・ブランド認知。120+のコミュニティと信頼関係のある日本人コミュニティへのリーチを提供。",
+      "メディア（Instagram / Web / note）を通じた採用広報・ブランド認知。バンクーバー在住の日本人コミュニティに届きます。",
   },
   {
     title: "採用連携",
     description:
-      "海外経験を持つ若手人材との接点。Co-op・インターン・新卒採用に向けた連携。Ryugaku+を通じた採用パイプライン構築が可能です。",
+      "海外経験を持つ若手人材との接点。Co-op・インターン・新卒採用に向けた連携。留学の早い段階から企業を知ってもらう導線をつくれます。",
   },
 ];
 
+// 数字はすべて社内の実測値。出典は各行の括弧内に持たせている。
 const merits = [
-  "現在120名以上、2年で1,000名以上へ拡大予定の確実な優秀人材パイプライン",
-  "現地日本人向けメディア「バンクーバーおすすめ」との連携による採用広報",
-  "CSR・社会貢献文脈での発信素材の提供（情報格差解決への貢献）",
-  "若者のリアルな声・ストーリーを活用したオーセンティックなコンテンツ制作",
-  "バンクーバー在住の日本人コミュニティとの深い信頼関係・ブランド安心感",
-  "Ryugaku+プロダクトの発展に関わる影響力：今の選択が数千人の未来を変える",
+  "現地メディア「バンクーバーおすすめ」のInstagramフォロワー6,000人（2026年7月時点）へのリーチ",
+  "読者構成は日本49.4%・カナダ45.4%。渡航前の層と現地の層に、同時に届く",
+  "平均エンゲージメント率5.38%（Instagramの一般的な目安は1〜3%）。累計保存81,216件",
+  "有償PRの実施実績あり（ANA OCS、KAGURA）。PR案件でも反応が落ちない",
+  "CSR・社会貢献文脈での発信素材の提供（情報格差の解消への貢献）",
+  "現地で活動している若手のリアルな声を使ったコンテンツ制作",
 ];
 
 export default function PartnersPage() {
@@ -62,15 +63,15 @@ export default function PartnersPage() {
           <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
             Partners
           </p>
-          <h1 className="text-page-title text-text mb-10">
-            3,000+の日本人が
+          <h1 className="text-page-title jp-fit [--chars:12] text-text mb-10">
+            海外に出た日本の若者と、
             <br />
-            毎年、バンクーバーへ。
+            企業をつなぐ。
           </h1>
           <p className="text-sub text-xl leading-relaxed mb-28 max-w-xl">
-            多くが情報格差に直面し、搾取的なサービスに巻き込まれます。
-            <span className="font-semibold">SyncBudsはその対抗策。</span>
-            優秀な若者を見つけ、育成し、採用機会を創出するプラットフォーム。
+            海外に出た若者の多くが、信頼できる情報にたどり着けないまま最初の数ヶ月を消耗します。
+            <span className="font-semibold">SyncBudsは、その手前に立つコミュニティです。</span>
+            現地で活動している若手と、企業との接点をつくります。
           </p>
 
           <section className="mb-28">
@@ -124,30 +125,42 @@ export default function PartnersPage() {
             </h3>
             <div className="bg-surface rounded-2xl p-8">
               <h4 className="font-sans text-xl font-bold text-text mb-3">
-                Robert Walters × SyncBuds キャリアセミナー
+                Robert Walters Japan × SyncBuds
+                <br />
+                オンラインキャリアセミナー「海外経験を、仕事に変える。」
               </h4>
+              <p className="text-sm text-sub/80 mb-4 tracking-wide">
+                2026年6月7日開催 / 参加確定16名
+              </p>
+              <p className="text-sub text-base leading-relaxed mb-4">
+                Robert Walters Japan のグローバルキャリアコンサルタントを招き、
+                海外経験を帰国後のキャリアにどうつなげるかをテーマに実施しました。
+              </p>
               <p className="text-sub text-base leading-relaxed">
-                グローバル人材紹介企業Robert Waltersと共催したキャリアセミナー。
-                バンクーバー在住の若手日本人を対象に、海外経験を活かしたキャリア設計について議論。
-                参加者に直接的なキャリア接続の機会を提供しました。
+                参加者は社会人のワーキングホリデー層が50%、Co-op留学生と正規留学生がそれぞれ18.8%。
+                申込時に最も多く挙がった悩みは「帰国後のキャリア」で、
+                次いで「Co-opの就活」「英語力への不安」でした。
               </p>
             </div>
           </section>
 
           <section className="mb-28">
             <h2 className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
-              Ryugaku+ Platform
+              Early Reach
             </h2>
             <h3 className="font-sans text-3xl font-bold text-text mb-10">
-              スケーリングプロダクト
+              留学中から、知ってもらう
             </h3>
             <div className="bg-surface rounded-2xl p-8">
               <p className="text-sub text-base leading-relaxed mb-4">
-                Ryugaku+は、海外の日本人を搾取的なエージェントから守り、優秀な若者と企業を直結させるプラットフォームです。
+                日本企業の名前を調べ始めるのは、たいてい帰国を意識してからです。
+                そこで初めて出てくる会社と、留学の途中からすでに知っている会社とでは、
+                選択肢に残る確率が変わります。
               </p>
               <p className="text-sub text-base leading-relaxed">
-                パートナー企業は、採用連携を通じてこのプロダクトの構築に関わることができます。
-                今から関わることで、数年後の1,000s+のネットワークに影響力を持ちます。
+                SyncBudsは、現地で活動している若手と日常的に接している立場から、
+                その早い段階の接点をつくれます。
+                イベント・メディア・コミュニティのどこから入るかは、一緒に設計します。
               </p>
             </div>
           </section>
@@ -175,9 +188,9 @@ export default function PartnersPage() {
             </h3>
             <p className="text-sub text-lg mb-12 leading-relaxed">
               スポンサーシップ・共催・採用連携について。
-              カナダで最も急成長中の日本人タレントセグメントにリーチする、その方法を一緒に考えましょう。
+              バンクーバーで挑戦している日本の若手と、どうつながるか一緒に考えましょう。
             </p>
-            <Link href="/contact" className="btn-primary text-lg !px-10 !py-5">
+            <Link href="/contact?type=partner#form" className="btn-primary text-lg !px-10 !py-5">
               お問い合わせ <span>→</span>
             </Link>
           </section>
