@@ -2,6 +2,10 @@
   "name": "website-jp",
   "version": "0.1.0",
   "private": true,
+  "//": "Next 16 は Node 20 以上が必要。Cloudflare Pages のビルドNodeは .node-version で固定している（未指定だと古いデフォルトが使われ、lockfileVersion 3 を読めず npm ci が失敗する）",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
