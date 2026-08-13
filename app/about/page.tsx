@@ -123,7 +123,9 @@ export default function AboutPage() {
             <h2 className="text-xs text-sub uppercase tracking-[0.2em] mb-12 font-sans text-center">
               SyncBuds in Numbers
             </h2>
-            <div className="grid grid-cols-3 gap-10 text-center">
+            {/* モバイルで3列にすると「Vancouver」が列幅に収まらず横スクロールが出る。
+                トップの Stats と同じく、狭い幅では縦に積む。 */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
               {[
                 { num: "6", label: "期", note: "立ち上げからの期数" },
                 { num: "120+", label: "累計参加メンバー", note: "設立からの延べ人数" },

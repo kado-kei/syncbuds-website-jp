@@ -25,7 +25,7 @@ export default function Activities() {
         <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
           Main Activities
         </p>
-        <h2 className="text-section-title text-text mb-20">
+        <h2 className="text-section-title jp-fit [--chars:6] text-text mb-20">
           主な取り組み
         </h2>
 

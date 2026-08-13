@@ -7,7 +7,7 @@ export default function WhatIs() {
         <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
           What is SyncBuds
         </p>
-        <h2 className="text-section-title text-text mb-10">
+        <h2 className="text-section-title jp-fit [--chars:8] text-text mb-10">
           SyncBudsとは
         </h2>
         <div className="space-y-6 text-text/85 text-lg md:text-xl leading-relaxed">

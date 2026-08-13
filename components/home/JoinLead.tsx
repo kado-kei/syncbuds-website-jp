@@ -14,7 +14,7 @@ export default function JoinLead() {
         <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
           Join Us
         </p>
-        <h2 className="text-section-title text-text mb-8">
+        <h2 className="text-section-title jp-fit [--chars:12] text-text mb-8">
           一緒に、挑戦しませんか。
         </h2>
         <p className="text-sub text-lg md:text-xl leading-relaxed mb-6 max-w-xl mx-auto">

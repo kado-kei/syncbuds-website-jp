@@ -239,7 +239,7 @@ export default function JoinPage() {
           </section>
 
           <section className="text-center pt-16 border-t border-border">
-            <h3 className="text-section-title text-text mb-6">
+            <h3 className="text-section-title jp-fit [--chars:10] text-text mb-6">
               ここから、始めよう。
             </h3>
             <p className="text-sub text-lg mb-12 leading-relaxed">

@@ -7,7 +7,7 @@ export default function PartnersLead() {
         <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
           For Partners
         </p>
-        <h2 className="text-section-title text-text mb-8">
+        <h2 className="text-section-title jp-fit [--chars:10] text-text mb-8">
           企業・団体の皆さまへ
         </h2>
         <p className="text-sub text-lg md:text-xl leading-relaxed mb-14 max-w-xl mx-auto">

@@ -74,7 +74,6 @@ body {
   line-height: 1.15;
   letter-spacing: -0.02em;
   font-feature-settings: "palt" 1;
-  text-wrap: balance;
   --jp-fit-max: 2.75rem;
 }
 
@@ -121,9 +120,11 @@ body {
 }
 
 .jp-fit {
+  /* 100cqi ではなく 98cqi。ちょうど収まる計算になると、サブピクセルの
+     丸めで最後の1文字だけが次行に落ちる。2% はそのための余白。 */
   font-size: min(
     var(--jp-fit-max, 3.5rem),
-    100cqi / (var(--chars, 12) * var(--jp-fit-em, 0.95))
+    98cqi / (var(--chars, 12) * var(--jp-fit-em, 0.95))
   );
   /* balance は <br /> の意図を無視して行を再配分するので打ち消す */
   text-wrap: wrap;

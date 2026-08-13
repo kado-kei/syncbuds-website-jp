@@ -28,7 +28,7 @@ export default function WhySection() {
         <p className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
           Why SyncBuds
         </p>
-        <h2 className="text-section-title text-text mb-20">
+        <h2 className="text-section-title jp-fit [--chars:13] text-text mb-20">
           なぜSyncBudsが必要なのか
         </h2>
 
