@@ -8,11 +8,15 @@
 
 ---
 
-## 動かすのに必要な設定（Keiの作業）
+**2026年8月13日時点で稼働中。** Slack の Workflow は作成済み、Cloudflare の `SLACK_WEBHOOK_URL` も登録済みで、本番の `/contact` から送ると `#c-application-form` に届く。以下は作り直すときのための記録。
+
+---
+
+## 設定手順（作り直すとき用）
 
 ### 1. Slack で Workflow を作る
 
-Incoming Webhook ではなく Workflow Builder を使う（すでに Workflow Trigger の URL が発行されているため、それに合わせてコード側を作ってある）。
+Incoming Webhook ではなく Workflow Builder を使う。Incoming Webhook と違って Block Kit を受け取れず、事前に定義した変数へフラットな文字列を渡す形になる。
 
 1. Slack で `⚡ ツール` → 「ワークフロー」→「新しいワークフローを作成」
 2. トリガーを **「Webhook」** にする
@@ -40,7 +44,9 @@ Incoming Webhook ではなく Workflow Builder を使う（すでに Workflow Tr
 6. ワークフローを公開（Publish）する
 7. トリガーの設定画面に戻り、「Webhook URL をコピー」で `https://hooks.slack.com/triggers/...` を取得する
 
-このURLを知っている人は誰でもこのワークフローを起動できる。GitHubにも Slack にも貼らないこと。**すでに一度チャットで共有されている場合は、そのURLは使わずトリガーを再発行すること**（Webhookトリガーの設定画面から再生成できる）。
+このURLを知っている人は誰でもこのワークフローを起動できる。GitHubにも Slack にも貼らないこと。
+
+漏れた場合に起きるのは、`#c-application-form` に外部から投稿を流し込まれることだけで、Slack の他のデータが読まれるわけではない。実際に荒らされたら、Webhookトリガーの設定画面から再発行して `SLACK_WEBHOOK_URL` を差し替えれば止まる。
 
 ### 2. Cloudflare Pages に環境変数として登録する
 
@@ -51,7 +57,7 @@ Cloudflare ダッシュボード → Workers & Pages → 該当プロジェク�
 - 種類: **Secret**（暗号化。Plaintext にしない）
 - Production と Preview の両方に入れる
 
-**「デプロイし直す」について:** このリポジトリは GitHub 連携なので、通常は push すれば自動でビルドされる。今回のように環境変数だけを追加した場合は新しい push が無いので、自動では反映されない。反映させるには次のどちらかをやる。
+**「デプロイし直す」について:** このリポジトリは GitHub 連携なので、通常は push すれば自動でビルドされる。環境変数だけを変えた場合は新しい push が無いので、自動では反映されない。反映させるには次のどちらかをやる。
 
 - Cloudflare ダッシュボード → 対象プロジェクト → **Deployments** タブ → 一番上（最新）のデプロイの `...` メニュー → **Retry deployment**
 - または、何でもいいので1行コミットして push する（変数を使い始めるこの作業自体をコミットしてもよい）
