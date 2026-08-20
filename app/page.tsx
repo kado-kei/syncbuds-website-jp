@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AnnouncementBanner from "@/components/home/AnnouncementBanner";
 import Hero from "@/components/home/Hero";
 import WhatIs from "@/components/home/WhatIs";
 import Stats from "@/components/home/Stats";
@@ -13,7 +12,6 @@ import FinalCTA from "@/components/home/FinalCTA";
 export default function HomePage() {
   return (
     <>
-      <AnnouncementBanner />
       <Navbar />
       <main>
         <Hero />

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const navItems = [
@@ -27,11 +28,17 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
-        {/* Logo */}
-        <Link href="/" className="flex items-center" aria-label="SyncBuds ホーム">
-          <span className="font-sans text-xl font-bold tracking-tight text-text">
-            SyncBuds
-          </span>
+        {/* Logo — 正式なブランドアセット。SVGは元データの余白を切り落とし、
+            viewBox をロゴの実寸ぴったりに詰めてある（public/images/brand/）。 */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/brand/syncbuds-logo.svg"
+            alt="SyncBuds"
+            width={959}
+            height={199}
+            priority
+            className="h-7 w-auto"
+          />
         </Link>
 
         {/* Desktop nav */}
