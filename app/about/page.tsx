@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -80,17 +79,9 @@ export default function AboutPage() {
               Founder
             </h2>
 
-            <div className="relative aspect-[3/4] max-w-xs mx-auto rounded-2xl overflow-hidden bg-surface mb-12">
-              <Image
-                src="/images/founder/kei-portrait.jpg"
-                alt="Kei Kadowaki — Founder"
-                fill
-                className="object-cover object-top"
-                unoptimized
-              />
-            </div>
-
-            <div className="text-center mb-12">
+            {/* 以前はこの上にポートレートが入っていて、それに合わせて中央寄せだった。
+                写真を外したので、見出しや本文と同じ左寄せに戻している。 */}
+            <div className="mb-12">
               <h3 className="text-sub-heading text-text mb-2">
                 Kei Kadowaki
               </h3>
