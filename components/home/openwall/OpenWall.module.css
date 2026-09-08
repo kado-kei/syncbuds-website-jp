@@ -1,0 +1,325 @@
+/* ─── 情報の壁が開くスクロール演出 ────────────────────────────
+   コンセプトデモ（2026-09）からの移植。
+   CSS変数（--opening / --edge / --progress）は :root ではなく .story 要素に
+   セットされる。壁もパネルも .story の子孫なので、それで届く。 */
+
+.story {
+  height: 650vh;
+  height: 650svh;
+  /* 演出中の文字はこの中で完結させる。サイト側の色を継がない */
+  color: #101010;
+  font-feature-settings: "palt" 1, "kern" 1;
+}
+
+.stage {
+  height: 100vh;
+  height: 100svh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background: #fff;
+  /* mix-blend-mode を使う子（フッター）を stage 内に閉じ込める */
+  isolation: isolate;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── 壁 ─────────────────────────────────────────────────
+   50% ちょうどだと、開き始めの1フレームで中央に1px の隙間が見える。
+   50.05% はそのための重なり。 */
+.wall {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.05%;
+  background: #000;
+  z-index: 3;
+  will-change: transform;
+}
+.left  { left: 0;  transform: translateX(calc(var(--opening, 0) * -100%)); }
+.right { right: 0; transform: translateX(calc(var(--opening, 0) *  100%)); }
+
+.wallEdge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  opacity: var(--edge, 0);
+  background: linear-gradient(90deg, #191919, #020202);
+}
+.left  .wallEdge { right: 0; }
+.right .wallEdge { left: 0; transform: scaleX(-1); }
+
+/* ─── パネル ─────────────────────────────────────────────
+   opacity / transform / filter は JS が毎フレーム直接書き込む。
+   ここでは初期値と配置だけを持つ。 */
+.panel {
+  position: absolute;
+  inset: 15% 5% 16%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+.panel.active {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 課題シーンだけは壁より前面。黒い壁の上に白文字で乗る */
+.problem {
+  z-index: 5;
+  color: #fff;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  margin: 0 0 28px;
+  font-weight: 500;
+}
+
+.panel h1, .panel h2, .panel p { margin: 0; }
+
+.panel h1 {
+  font-size: clamp(32px, 5.6vw, 82px);
+  line-height: 1.45;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+.panel h2 {
+  font-size: clamp(30px, 4.4vw, 64px);
+  line-height: 1.5;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+
+.body {
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 2;
+  /* 日本語を文節で折る。「一人ひとりの納/得できる」のような割れ方を防ぐ */
+  word-break: auto-phrase;
+  max-width: 620px;
+  margin: 24px auto 0;
+  color: #666;
+}
+.problem .body { color: #aaa; }
+.problem .tag {
+  margin-top: 36px;
+  font-size: 14px;
+  color: #999;
+  border-top: 1px solid #333;
+  padding-top: 22px;
+}
+
+/* 壁がまだ 30% しか開いていない段階のコピー。開口部の内側に収める */
+.slogan { inset-inline: 35%; }
+.slogan h2 {
+  font-size: clamp(20px, 3.1vw, 48px);
+  line-height: 1.65;
+}
+.slogan .eyebrow { letter-spacing: 0.1em; font-size: 12px; }
+
+.about { inset-inline: 18%; }
+.about .wordmark {
+  font-size: clamp(42px, 7.5vw, 110px);
+  letter-spacing: -0.065em;
+  font-weight: 750;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+.about h2 { font-size: clamp(22px, 2.6vw, 38px); }
+
+.solutions { inset-inline: 8%; }
+.solutions > h2 { font-size: clamp(27px, 3.2vw, 47px); }
+
+.cards {
+  width: 100%;
+  max-width: 1120px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5vw;
+  margin-top: 90px;
+}
+.card { text-align: left; position: relative; }
+.card .num {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: #666;
+  display: block;
+  margin-bottom: 16px;
+}
+.card h3 {
+  font-weight: 600;
+  font-size: clamp(21px, 2vw, 29px);
+  margin: 0 0 15px;
+}
+.card p {
+  word-break: auto-phrase;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #555;
+  max-width: 290px;
+}
+
+.join h2 { font-size: clamp(32px, 4.8vw, 72px); }
+.join .body { color: #333; }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 17px 27px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  min-height: 54px;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+.cta.secondary { background: rgba(255, 255, 255, 0.65); color: #111; }
+.cta:hover { background: #333; color: #fff; }
+.cta:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+
+/* ─── 進捗の読み取り帯 ───────────────────────────────────
+   difference で、白背景でも黒壁の上でも読める。 */
+.footer {
+  position: absolute;
+  bottom: 26px;
+  left: 4vw;
+  right: 4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  z-index: 8;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+.readout { font-size: 12px; letter-spacing: 0.1em; }
+.readout strong {
+  font-size: 27px;
+  font-weight: 400;
+  display: block;
+  letter-spacing: -0.05em;
+  margin-top: 5px;
+}
+.nav { display: flex; gap: 6px; }
+.nav button {
+  font: inherit;
+  border: 0;
+  border-top: 2px solid #555;
+  color: #aaa;
+  background: none;
+  padding: 12px 10px 5px;
+  cursor: pointer;
+  font-size: 12px;
+  min-height: 44px;
+}
+.nav button[aria-current="step"] { border-color: #fff; color: #fff; }
+.nav button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.scrollNote { font-size: 12px; letter-spacing: 0.15em; }
+
+.progress {
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(var(--progress, 0) * 100%);
+  background: #777;
+  z-index: 10;
+}
+
+@media (max-width: 700px) {
+  .panel { inset-block: 14% 18%; }
+  .problem h1 { font-size: clamp(27px, 7.5vw, 42px); }
+  .problem .body { font-size: 16px; line-height: 1.9; }
+  .problem .tag { font-size: 12px; margin-top: 22px; }
+  .eyebrow { margin-bottom: 18px; }
+  .slogan { inset-inline: 35.5%; }
+  .slogan h2 { font-size: clamp(18px, 5.5vw, 27px); line-height: 1.65; }
+  .slogan .eyebrow { font-size: 10px; letter-spacing: 0; }
+  .about { inset-inline: 17%; }
+  .about .body { font-size: 16px; line-height: 1.85; margin-top: 18px; }
+  .about h2 { font-size: 22px; }
+  .solutions { inset-inline: 10%; justify-content: flex-start; padding-top: 4vh; }
+  .solutions .eyebrow { margin-bottom: 12px; }
+  .solutions > h2 { font-size: 25px; }
+  .cards { grid-template-columns: 1fr; gap: 24px; margin-top: 26px; max-width: 380px; }
+  .card { padding-left: 32px; }
+  .card .num { position: absolute; left: 0; top: 5px; margin: 0; }
+  .card h3 { font-size: 22px; margin-bottom: 7px; }
+  .card p { font-size: 15px; line-height: 1.6; max-width: none; }
+  .join { inset-inline: 8%; }
+  .join h2 { font-size: 34px; }
+  .join .body { font-size: 16px; }
+  .actions { gap: 10px; flex-direction: column; width: 100%; max-width: 300px; margin-top: 23px; }
+  .cta { padding: 14px; }
+  .footer { left: 24px; right: 24px; bottom: 18px; }
+  .scrollNote { display: none; }
+  .nav button { padding-inline: 9px; }
+  .readout strong { font-size: 22px; }
+}
+
+@media (max-height: 650px) {
+  .panel { inset-block: 12% 16%; }
+  .eyebrow { margin-bottom: 10px; }
+  .body { margin-top: 12px; }
+  .cards { gap: 18px; margin-top: 24px; }
+  .problem .tag { margin-top: 16px; padding-top: 12px; }
+  .panel h1 { font-size: 30px; }
+  .join h2 { font-size: 30px; }
+  .actions { margin-top: 16px; }
+  .card h3 { font-size: 19px; }
+  .card p { font-size: 14px; }
+  .solutions > h2 { font-size: 23px; }
+}
+
+/* ─── JSが動かない環境 ───────────────────────────────────
+   パネルの初期状態は opacity:0 なので、JS前提のままだと何も見えない。
+   本文はHTMLに全部入っている（クローラは読める）ので、
+   演出を捨てて縦に積んだ静的なページとして見せる。 */
+@media (scripting: none) {
+  .story { height: auto; }
+  .stage {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: 80px 0;
+  }
+  .panel {
+    position: static;
+    inset: auto;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    padding: 56px 24px;
+    filter: none;
+    transform: none;
+  }
+  .problem { color: #101010; }
+  .problem .body { color: #666; }
+  .problem .tag { border-top-color: #ddd; }
+  .cards { margin-top: 40px; }
+  .wall, .canvas, .footer, .progress { display: none; }
+}

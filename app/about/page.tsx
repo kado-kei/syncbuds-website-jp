@@ -26,7 +26,7 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-6 text-text/85 text-lg md:text-xl leading-relaxed">
               <p>
-                バンクーバー発。海外で挑戦する日本の若者が、情報格差や孤立に苦しまずに済むように。
+                バンクーバー発。海外で挑戦する日本の若者が、情報アクセスの壁や孤立に阻まれずに済むように。
                 <span className="font-semibold">自分から動く人が、動きやすくなる場所</span>をつくっています。
               </p>
               <p>
@@ -69,7 +69,7 @@ export default function AboutPage() {
                 それが私たちの使命であり、どんな判断に迷っても戻る場所。
               </p>
               <p className="text-sm text-sub/80">
-                正しい場所に、正しい価値を届ける。優秀なタレントと機会を、情報格差のない世界へ。
+                正しい場所に、正しい価値を届ける。優秀なタレントと機会を、情報アクセスの壁がない世界へ。
               </p>
             </div>
           </section>

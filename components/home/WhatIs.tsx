@@ -12,7 +12,7 @@ export default function WhatIs() {
         </h2>
         <div className="space-y-6 text-text/85 text-lg md:text-xl leading-relaxed">
           <p>
-            海外に挑戦する日本の若者が、情報格差や孤立に苦しまずに済むように。
+            海外に挑戦する日本の若者が、情報アクセスの壁や孤立に阻まれずに済むように。
           </p>
           <p>
             バンクーバーを拠点に、留学生・Co-op生・若手社会人が

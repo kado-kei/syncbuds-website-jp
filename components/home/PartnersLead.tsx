@@ -11,8 +11,8 @@ export default function PartnersLead() {
           企業・団体の皆さまへ
         </h2>
         <p className="text-sub text-lg md:text-xl leading-relaxed mb-14 max-w-xl mx-auto">
-          SyncBudsは、海外で挑戦する日本の若者を支えるコミュニティです。
-          共催・スポンサーシップ・採用広報を通じて、次世代人材と接点を持ちませんか。
+          情報アクセスの壁をなくす取り組みを、一緒につくりませんか。
+          共催・スポンサーシップ・採用広報を通じて、次世代人材と接点を持てます。
         </p>
         <Link href="/partners" className="btn-outline text-lg !px-10 !py-5">
           Partner With Us <span>→</span>

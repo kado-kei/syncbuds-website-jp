@@ -11,20 +11,51 @@ const navItems = [
   { label: "Contact", href: "/contact", accent: true },
 ];
 
-export default function Navbar() {
+/**
+ * @param overOpenWall トップの演出（#open-wall）の上を通る間、ヘッダーを
+ *   白抜き＋ mix-blend-mode: difference にする。背景が黒なら白く、白なら黒く出るので、
+ *   壁が開いて背景が反転しても読める。scrollY の閾値では対応できない
+ *   （黒い壁は 40px を超えてもずっと続く）ため、演出の実寸を測って判定する。
+ */
+export default function Navbar({ overOpenWall = false }: { overOpenWall?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [overStory, setOverStory] = useState(overOpenWall);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const story = overOpenWall ? document.getElementById("open-wall") : null;
+    if (!story) return;
+    /* getBoundingClientRect を mount 時に1回測る実装だと、CSS Modules の
+       スタイルが当たる前に測って高さ0を読み、以後スクロールするまで直らない。
+       IntersectionObserver ならレイアウトが確定した時点で発火し直す。
+       上端を -80px（ヘッダーの高さ h-20）削ることで、
+       「ヘッダーの帯がまだ演出の上にいるか」をそのまま判定できる。 */
+    const io = new IntersectionObserver(([entry]) => setOverStory(entry.isIntersecting), {
+      rootMargin: "-80px 0px 0px 0px",
+    });
+    io.observe(story);
+    return () => io.disconnect();
+  }, [overOpenWall]);
+
+  // メニューを開くと自前の背景（白）が出るので、そこでは反転をやめる
+  const blend = overStory && !menuOpen;
+  const invert = blend;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-bg/95 backdrop-blur border-b border-border" : "bg-transparent"
+        blend
+          ? "bg-transparent mix-blend-difference"
+          : scrolled
+            ? "bg-bg/95 backdrop-blur border-b border-border"
+            : "bg-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
@@ -37,7 +68,9 @@ export default function Navbar() {
             width={959}
             height={199}
             priority
-            className="h-7 w-auto"
+            className={`h-7 w-auto transition-[filter] duration-300 ${
+              invert ? "brightness-0 invert" : ""
+            }`}
           />
         </Link>
 
@@ -49,8 +82,12 @@ export default function Navbar() {
                 href={item.href}
                 className={
                   item.accent
-                    ? "btn-primary !py-2 !px-5 !text-sm"
-                    : "text-sm text-sub hover:text-text transition-colors tracking-wide"
+                    ? invert
+                      ? "btn-outline !py-2 !px-5 !text-sm !border-white !text-white hover:!bg-white hover:!text-black"
+                      : "btn-primary !py-2 !px-5 !text-sm"
+                    : invert
+                      ? "text-sm text-white/70 hover:text-white transition-colors tracking-wide"
+                      : "text-sm text-sub hover:text-text transition-colors tracking-wide"
                 }
               >
                 {item.label}
@@ -65,9 +102,9 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="メニューを開く"
         >
-          <span className={`block w-6 h-px bg-text transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2.5" : ""}`} />
-          <span className={`block w-6 h-px bg-text transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-px bg-text transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} />
+          <span className={`block w-6 h-px ${invert ? "bg-white" : "bg-text"} transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2.5" : ""}`} />
+          <span className={`block w-6 h-px ${invert ? "bg-white" : "bg-text"} transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block w-6 h-px ${invert ? "bg-white" : "bg-text"} transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} />
         </button>
       </nav>
 

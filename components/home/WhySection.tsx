@@ -2,7 +2,7 @@ import WatercolorAccent from "@/components/graphics/WatercolorAccent";
 
 const challenges = [
   {
-    title: "情報格差",
+    title: "情報アクセスの壁",
     description:
       "海外に来たばかりの日本人は、信頼できる情報にアクセスしにくい。不正確な情報や搾取的なサービスに巻き込まれるリスクがある。",
     color: "blue" as const,
