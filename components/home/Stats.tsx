@@ -1,17 +1,16 @@
-// 数字は定義を分けて出す。「120名」が現役なのか累計なのかが伝わらないと、
+// 数字は定義を分けて出す。「170名」が現役なのか累計なのかが伝わらないと、
 // 企業側からは水増しに見える。値はすべて社内の実測値。
 const stats = [
-  { num: "6", label: "期", note: "立ち上げからの期数" },
-  { num: "120+", label: "累計参加メンバー", note: "設立からの延べ人数" },
-  { num: "6,000", label: "IGフォロワー", note: "バンクーバーおすすめ" },
-  { num: "Vancouver", label: "拠点", note: "British Columbia, Canada" },
+  { num: "2024", label: "年 設立", note: "カナダ・BC州登録の非営利団体" },
+  { num: "170+", label: "運営参加メンバー", note: "設立からの延べ人数" },
+  { num: "6,000+", label: "インスタグラムフォロワー", note: "バンクーバーおすすめ" },
 ];
 
 export default function Stats() {
   return (
     <section className="py-[var(--spacing-section-lg)] bg-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border">
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
           {stats.map((stat) => (
             <div
               key={stat.label}
