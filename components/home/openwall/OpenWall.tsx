@@ -6,28 +6,30 @@ import { useOpenWall } from "./useOpenWall";
 
 /** ナビの読み上げ用。表示は番号だけなので、行き先はここで言葉にする */
 const sceneLabels = [
-  "課題",
+  "なぜSyncBudsが必要なのか",
   "私たちの意思",
   "SyncBudsとは",
-  "3つの接点",
+  "主な取り組み",
   "参加する",
 ];
 
-const solutions = [
+/* 既存サイトの Activities セクションと同じ3本柱・同じ説明文。
+   演出のために別の言葉を作らない */
+const activities = [
   {
     num: "01",
-    title: "リアルを届ける。",
-    body: "経験者の声と現地の情報で、留学を自分で設計できるようにする。",
+    title: "Community",
+    body: "バンクーバーで挑戦する仲間と出会う場をつくる。",
   },
   {
     num: "02",
-    title: "仲間と出会う。",
-    body: "コミュニティとイベントで、相談し学び挑戦できるつながりをつくる。",
+    title: "Media",
+    body: "現地情報を届けながら、メンバーが実践経験を積む。",
   },
   {
     num: "03",
-    title: "経験を未来へ。",
-    body: "企業やキャリアとの接点をつくり、海外経験を次の可能性につなげる。",
+    title: "Career",
+    body: "海外経験を次のキャリアにつなげる機会をつくる。",
   },
 ];
 
@@ -48,18 +50,20 @@ export default function OpenWall() {
         <section className={`${styles.panel} ${styles.problem}`} ref={(el) => {
             panelsRef.current[0] = el;
           }}>
-          <p className={styles.eyebrow}>01 — THE PROBLEM</p>
-          <h1>
-            「知らなかった」が、
+          <p className={styles.eyebrow}>01 — WHY SYNCBUDS</p>
+          <h1 className="jp-fit [--chars:10]">
+            「知らなかった」で、
             <br />
-            未来を狭めている。
+            挑戦が止まる。
           </h1>
           <p className={styles.body}>
-            留学前は、現地のリアルが見えない。
+            信頼できる情報にたどり着けない。
             <br />
-            留学中は、その先のキャリアが見えない。
+            頼れる人がいない。
+            <br />
+            環境の差で、機会すら得られない。
           </p>
-          <p className={styles.tag}>なくしたいのは、情報アクセスの壁です。</p>
+          <p className={styles.tag}>情報アクセスの壁 / 孤立 / 機会の不平等</p>
         </section>
 
         {/* ② スローガン — 開口率30%。まだ細い隙間の中に収まる文字数にしてある */}
@@ -67,10 +71,10 @@ export default function OpenWall() {
             panelsRef.current[1] = el;
           }}>
           <p className={styles.eyebrow}>02 — OUR BELIEF</p>
-          <h2>
-            情報の壁を、ひらく。
+          <h2 className="jp-fit [--chars:8]">
+            情報は、ひらく。
             <br />
-            挑戦の、その先へ。
+            ひとりにしない。
           </h2>
         </section>
 
@@ -78,12 +82,19 @@ export default function OpenWall() {
         <section className={`${styles.panel} ${styles.about}`} ref={(el) => {
             panelsRef.current[2] = el;
           }}>
-          <p className={styles.eyebrow}>03 — WHO WE ARE</p>
+          <p className={styles.eyebrow}>03 — WHAT IS SYNCBUDS</p>
           <p className={styles.wordmark}>SyncBuds</p>
-          <h2>自分の未来を、自分で選べるように。</h2>
+          <h2 className="jp-fit [--chars:12]">
+            海外で挑戦する若者に、
+            <br />
+            実践機会と仲間を届ける。
+          </h2>
           <p className={styles.body}>
-            留学前・留学中・帰国後をつなぐNPO。情報と人との出会いを通じて、
-            一人ひとりの納得できる選択を支えます。
+            バンクーバー発。
+            <br />
+            留学生・Co-op生・若手社会人が、
+            <br />
+            実践を通じて成長するコミュニティ。
           </p>
         </section>
 
@@ -91,10 +102,10 @@ export default function OpenWall() {
         <section className={`${styles.panel} ${styles.solutions}`} ref={(el) => {
             panelsRef.current[3] = el;
           }}>
-          <p className={styles.eyebrow}>04 — THREE WAYS FORWARD</p>
-          <h2>未来をひらく、3つの接点。</h2>
+          <p className={styles.eyebrow}>04 — MAIN ACTIVITIES</p>
+          <h2 className="jp-fit [--chars:6]">主な取り組み</h2>
           <div className={styles.cards}>
-            {solutions.map((s) => (
+            {activities.map((s) => (
               <div className={styles.card} key={s.num}>
                 <span className={styles.num}>{s.num}</span>
                 <h3>{s.title}</h3>
@@ -108,19 +119,21 @@ export default function OpenWall() {
         <section className={`${styles.panel} ${styles.join}`} ref={(el) => {
             panelsRef.current[4] = el;
           }}>
-          <p className={styles.eyebrow}>05 — BETTER, TOGETHER</p>
-          <h2>つながるほど、可能性は広がる。</h2>
+          <p className={styles.eyebrow}>05 — JOIN US</p>
+          <h2 className="jp-fit [--chars:12]">一緒に、挑戦しませんか。</h2>
           <p className={styles.body}>
-            情報、人、機会。それぞれが重なるとき、
+            未経験でも、英語が完璧でなくても大丈夫。
             <br />
-            一人ではつくれない未来が動き出す。
+            「本気でやりたい」その気持ちがあれば、
+            <br />
+            ここがあなたの場所です。
           </p>
           <div className={styles.actions}>
             <Link href="/partners" className={`${styles.cta} ${styles.secondary}`}>
-              パートナーとして関わる <span aria-hidden="true">→</span>
+              Partner With Us <span aria-hidden="true">→</span>
             </Link>
             <Link href="/join" className={styles.cta}>
-              メンバーとして参加する <span aria-hidden="true">→</span>
+              Join Us <span aria-hidden="true">→</span>
             </Link>
           </div>
         </section>

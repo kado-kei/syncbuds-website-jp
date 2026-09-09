@@ -11,13 +11,13 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "SyncBuds — 情報の壁を、ひらく。",
+  title: "SyncBuds — 海外で挑戦する若者に、実践機会と仲間を届ける。",
   description:
-    "留学前・留学中・帰国後をつなぐNPO。情報アクセスの壁をなくし、海外に挑戦する日本の若者が自分で未来を選べるように。バンクーバー発、BC州登録の非営利団体。",
+    "バンクーバー発。留学生・Co-op生・若手社会人が、実践を通じて成長するコミュニティ。Registered in British Columbia.",
   openGraph: {
-    title: "SyncBuds — 情報の壁を、ひらく。",
+    title: "SyncBuds — 海外で挑戦する若者に、実践機会と仲間を届ける。",
     description:
-      "留学前・留学中・帰国後をつなぐNPO。情報アクセスの壁をなくし、海外に挑戦する日本の若者が自分で未来を選べるように。バンクーバー発、BC州登録の非営利団体。",
+      "バンクーバー発。留学生・Co-op生・若手社会人が、実践を通じて成長するコミュニティ。Registered in British Columbia.",
     locale: "ja_JP",
     type: "website",
   },
