@@ -13,7 +13,7 @@ const footerLinks = [
   {
     title: "Our Work",
     links: [
-      { label: "バンクーバーおすすめ", href: "https://instagram.com/vancouverosusume", external: true },
+      { label: "バンクーバーおすすめ", href: "https://www.instagram.com/vancouver_osusume", external: true },
       { label: "Ryugaku+", href: "https://www.ryugaku-plus.com/vancouver/app", external: true },
     ],
   },
