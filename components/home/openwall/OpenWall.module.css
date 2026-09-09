@@ -263,7 +263,19 @@
   .problem .tag { font-size: 12px; margin-top: 22px; }
   .eyebrow { margin-bottom: 18px; }
   .slogan { inset-inline: 35.5%; }
-  .slogan h2 { --jp-fit-max: clamp(18px, 5.5vw, 27px); line-height: 1.65; }
+  /* 開口部が約112pxしかないスマホでは、横書きだと jp-fit が14pxまで font-size を
+     落としてしまう。縦書きにすると隙間の「高さ」を使えるので、同じ幅のまま
+     字面が倍以上になる。<br /> は縦書きでは改列になり、日本語の縦組みどおり
+     右の列から左へ読める（情報は、ひらく。→ ひとりにしない。）。
+     jp-fit は横幅からサイズを決めるため、ここでは font-size を直接指定して外す。 */
+  .slogan h2 {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    /* 2列 × line-height 1.65 が開口部（パネル幅 = 29vw）に収まる最大値 */
+    font-size: min(30px, 8.3vw);
+    line-height: 1.65;
+    margin-top: 6px;
+  }
   .slogan .eyebrow { font-size: 10px; letter-spacing: 0; }
   .about { inset-inline: 17%; }
   .about .body { margin-top: 18px; }
@@ -328,4 +340,10 @@
   .problem .tag { border-top-color: #ddd; }
   .cards { margin-top: 40px; }
   .wall, .canvas, .footer, .progress { display: none; }
+}
+
+/* 縦書きの列の長さ（8文字）が入らない低い画面だけ、さらに詰める。
+   横書きのままのデスクトップに効かないよう max-width と併記する */
+@media (max-width: 700px) and (max-height: 650px) {
+  .slogan h2 { font-size: min(22px, 8.3vw); }
 }
