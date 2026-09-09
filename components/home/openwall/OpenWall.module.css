@@ -189,23 +189,6 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 17px 27px;
-  border: 1px solid #111;
-  background: #111;
-  color: #fff;
-  min-height: 54px;
-  font-size: 15px;
-  transition: background 0.2s;
-}
-.cta.secondary { background: rgba(255, 255, 255, 0.65); color: #111; }
-.cta:hover { background: #333; color: #fff; }
-.cta:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
-
 /* ─── 進捗の読み取り帯 ───────────────────────────────────
    difference で、白背景でも黒壁の上でも読める。 */
 .footer {
@@ -292,7 +275,6 @@
   .join h2 { --jp-fit-max: 34px; }
 
   .actions { gap: 10px; flex-direction: column; width: 100%; max-width: 300px; margin-top: 23px; }
-  .cta { padding: 14px; }
   .footer { left: 24px; right: 24px; bottom: 18px; }
   .scrollNote { display: none; }
   .nav button { padding-inline: 9px; }

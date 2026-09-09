@@ -128,12 +128,14 @@ export default function OpenWall() {
             <br />
             ここがあなたの場所です。
           </p>
+          {/* ボタンはサイト共通の .btn-primary / .btn-outline（globals.css）。
+              演出のためだけに別のボタンを作らない。順番も既存の FinalCTA と揃える */}
           <div className={styles.actions}>
-            <Link href="/partners" className={`${styles.cta} ${styles.secondary}`}>
-              Partner With Us <span aria-hidden="true">→</span>
-            </Link>
-            <Link href="/join" className={styles.cta}>
+            <Link href="/join" className="btn-primary text-lg !px-10 !py-5">
               Join Us <span aria-hidden="true">→</span>
+            </Link>
+            <Link href="/partners" className="btn-outline text-lg !px-10 !py-5">
+              Partner With Us <span aria-hidden="true">→</span>
             </Link>
           </div>
         </section>
