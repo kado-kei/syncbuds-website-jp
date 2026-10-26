@@ -115,3 +115,13 @@ npm run build && npx wrangler pages dev out --port 8788 --binding SLACK_WEBHOOK_
 ```
 
 Slackを汚したくないときは、受け取った内容を表示するだけのローカルサーバーを立てて、そのURLを `--binding` に渡せばよい。Workflow Trigger は素の POST を受け取れるので、モックサーバー側の実装を変える必要はない。
+
+---
+
+## 控え（メール＋スプレッドシート）
+
+Slack のワークフローが壊れても問い合わせが消えないよう、同じ内容を `contact@syncbuds.ca` へのメールとスプレッドシートにも残す。
+Google Apps Script を使う。セットアップは `../../form-backup/README.md`（`BACKUP_WEBHOOK_URL` と `BACKUP_TOKEN` を Secret に入れる）。未設定でも Slack だけで動く。
+
+**Slack の落とし穴（2026-10-22 に発生）:** Webhook トリガーの変数定義が消えると、Slack は 200 を返したまま中身を空で投稿する。
+ワークフローを直したら、メッセージ保存のあとに出る緑の「変更内容を公開」を押すこと（青い「公開する」ではない）。

@@ -7,6 +7,8 @@
 //
 // 必要な環境変数（Cloudflare Pages ダッシュボード → Settings → 環境変数）:
 //   SLACK_WEBHOOK_URL … Slack Workflow Builder の Webhook トリガー URL（Secret として登録）
+//   BACKUP_WEBHOOK_URL … 控え用 Google Apps Script の Web アプリ URL（Secret として登録）
+//   BACKUP_TOKEN       … 上のスクリプトと共通の合言葉（Secret）。form-backup/README.md 参照
 //
 // Workflow Builder 側の設定手順は functions/README.md を参照。
 // Webhook トリガーには「変数」を事前定義する必要があり、ここで送る JSON の
@@ -23,6 +25,10 @@
 
 interface Env {
   SLACK_WEBHOOK_URL?: string;
+  /** 控えの受け口（Google Apps Script の Web アプリ URL）。未設定なら控えは送らない */
+  BACKUP_WEBHOOK_URL?: string;
+  /** 上の受け口に付ける合言葉。Apps Script 側のスクリプトプロパティ SECRET と同じ値 */
+  BACKUP_TOKEN?: string;
 }
 
 interface PagesContext {
@@ -124,6 +130,67 @@ function slackWorkflowPayload(c: Record<string, string>, meta: { country: string
   };
 }
 
+/** Slack Workflow へ通知する。届いたら true */
+async function notifySlack(
+  env: Env,
+  clean: Record<string, string>,
+  meta: { country: string; userAgent: string },
+): Promise<boolean> {
+  if (!env.SLACK_WEBHOOK_URL) return false;
+  try {
+    const res = await fetch(env.SLACK_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(slackWorkflowPayload(clean, meta)),
+    });
+    if (!res.ok) {
+      console.error("Slack への通知に失敗", res.status, await res.text());
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("Slack への通知に失敗", err);
+    return false;
+  }
+}
+
+/**
+ * 控えを Google Apps Script へ送る（contact@syncbuds.ca へのメールとスプレッドシート記録）。
+ * Slack が壊れていても問い合わせが残るようにするための二重化。
+ * Apps Script は 302 で結果を返すので redirect: "follow" にする（実行は 302 の前に済んでいる）。
+ */
+async function sendBackup(
+  env: Env,
+  clean: Record<string, string>,
+  meta: { country: string; userAgent: string },
+): Promise<boolean> {
+  if (!env.BACKUP_WEBHOOK_URL || !env.BACKUP_TOKEN) return false;
+  try {
+    const res = await fetch(env.BACKUP_WEBHOOK_URL, {
+      method: "POST",
+      redirect: "follow",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        token: env.BACKUP_TOKEN,
+        site: "syncbuds.jp",
+        ...clean,
+        country: meta.country,
+        userAgent: meta.userAgent.slice(0, 200),
+        receivedAt: new Date().toISOString(),
+      }),
+    });
+    const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+    if (!res.ok || data.ok !== true) {
+      console.error("控えの送信に失敗", res.status, JSON.stringify(data));
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("控えの送信に失敗", err);
+    return false;
+  }
+}
+
 export const onRequestPost = async ({ request, env }: PagesContext): Promise<Response> => {
   // --- Origin チェック（他サイトに埋め込まれたフォームからの投稿を弾く） ---
   const origin = request.headers.get("Origin");
@@ -155,10 +222,10 @@ export const onRequestPost = async ({ request, env }: PagesContext): Promise<Res
     return json({ ok: false, errors }, 422);
   }
 
-  const webhook = env.SLACK_WEBHOOK_URL;
-  if (!webhook) {
+  const canBackup = Boolean(env.BACKUP_WEBHOOK_URL && env.BACKUP_TOKEN);
+  if (!env.SLACK_WEBHOOK_URL && !canBackup) {
     // 設定漏れを送信者のせいにしない。ログに出して、本人にはメール導線を案内する。
-    console.error("SLACK_WEBHOOK_URL が未設定のため通知できませんでした");
+    console.error("SLACK_WEBHOOK_URL も BACKUP_WEBHOOK_URL/BACKUP_TOKEN も未設定のため通知できませんでした");
     return json({ ok: false, error: "not_configured" }, 503);
   }
 
@@ -167,17 +234,14 @@ export const onRequestPost = async ({ request, env }: PagesContext): Promise<Res
     userAgent: request.headers.get("User-Agent") || "不明",
   };
 
-  const res = await fetch(webhook, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(slackWorkflowPayload(clean, meta)),
-  });
+  // Slack と控え（メール＋スプレッドシート）は並行して送る。
+  // どちらか片方でも届いていれば、送信者にはエラーを見せない（問い合わせを失わないため）。
+  const [slackOk, backupOk] = await Promise.all([
+    notifySlack(env, clean, meta),
+    sendBackup(env, clean, meta),
+  ]);
 
-  if (!res.ok) {
-    // Workflow Trigger は「変数名が一致しない」場合でも 200 を返すことがある。
-    // その場合はここに来ず正常終了してしまうので、変数名の一致は
-    // 必ず Slack 側で実際に届くか確認すること（README 参照）。
-    console.error("Slack への通知に失敗", res.status, await res.text());
+  if (!slackOk && !backupOk) {
     return json({ ok: false, error: "notify_failed" }, 502);
   }
 
