@@ -115,22 +115,11 @@ export default function EducationPartnersPage() {
 
           <section className="mb-28">
             <h2 className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
-              Roles
+              Phases
             </h2>
-            <h3 className="font-sans text-3xl font-bold text-text mb-4">
-              同じ留学生に、違う場所から関わる
+            <h3 className="font-sans text-3xl font-bold text-text mb-10">
+              フェーズごとに、SyncBudsがすること
             </h3>
-            <p className="text-sub text-base leading-relaxed mb-10">
-              学校の皆さまが担っているのは、学ぶ場と手続き、生活の土台です。SyncBudsは、その外側から、渡航前から帰国前後までの挑戦に関わります。
-            </p>
-            <div className="bg-surface rounded-2xl p-8 mb-4">
-              <p className="text-xs text-sub uppercase tracking-[0.2em] mb-3 font-sans">
-                学校
-              </p>
-              <p className="text-text text-lg leading-relaxed">
-                学ぶ場・手続き・生活の土台を、留学のあいだずっと支える
-              </p>
-            </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {stages.map((s, i) => (
                 <div key={s.label} className="bg-surface rounded-2xl p-6">
@@ -142,9 +131,6 @@ export default function EducationPartnersPage() {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-sub uppercase tracking-[0.2em] mt-4 font-sans">
-              SyncBuds
-            </p>
           </section>
 
           <section className="mb-28">
