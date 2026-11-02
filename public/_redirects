@@ -1,4 +1,7 @@
 # 名刺のQR用の転送URL（Cloudflare Pages）
-# QRには https://syncbuds.jp/c だけを載せる。行き先を変えるときはここの右側だけ書き換えて push する。
+# QRには https://syncbuds.jp/qr-kei または /qr-keisuke だけを載せる。
+# 行き先を変えるときは右側だけ書き換えて push する。名刺の刷り直しは不要。
 # 302（一時転送）にしてあるのは、行き先を後から変えてもブラウザに覚えられないようにするため。
-/c  /?utm_source=meishi&utm_medium=qr&utm_campaign=business_card  302
+# utm_content で誰の名刺から来たかを分ける。
+/qr-kei      /?utm_source=meishi&utm_medium=qr&utm_campaign=business_card&utm_content=kei      302
+/qr-keisuke  /?utm_source=meishi&utm_medium=qr&utm_campaign=business_card&utm_content=keisuke  302
