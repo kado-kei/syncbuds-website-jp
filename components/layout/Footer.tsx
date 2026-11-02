@@ -6,6 +6,7 @@ const footerLinks = [
     links: [
       { label: "About", href: "/about" },
       { label: "Partners", href: "/partners" },
+      { label: "教育機関の方へ", href: "/partners/education" },
       { label: "Join", href: "/join" },
       { label: "Contact", href: "/contact" },
     ],

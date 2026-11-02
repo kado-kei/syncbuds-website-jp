@@ -4,9 +4,23 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-const navItems = [
+type NavItem = {
+  label: string;
+  href: string;
+  accent?: boolean;
+  children?: { label: string; href: string }[];
+};
+
+const navItems: NavItem[] = [
   { label: "About", href: "/about" },
-  { label: "Partners", href: "/partners" },
+  {
+    label: "Partners",
+    href: "/partners",
+    children: [
+      { label: "企業の方へ", href: "/partners" },
+      { label: "教育機関の方へ", href: "/partners/education" },
+    ],
+  },
   { label: "Join", href: "/join" },
   { label: "Contact", href: "/contact", accent: true },
 ];
@@ -77,7 +91,7 @@ export default function Navbar({ overOpenWall = false }: { overOpenWall?: boolea
         {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <li key={item.href}>
+            <li key={item.href} className={item.children ? "relative group" : undefined}>
               <Link
                 href={item.href}
                 className={
@@ -92,6 +106,32 @@ export default function Navbar({ overOpenWall = false }: { overOpenWall?: boolea
               >
                 {item.label}
               </Link>
+              {/* プルダウン。pt-4 の透明な橋でリンクとパネルの間のホバーを切らさない。
+                  mix-blend-difference の間はパネルを黒にして、文字だけが背景に浮くようにする */}
+              {item.children && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 hidden group-hover:block group-focus-within:block">
+                  <ul
+                    className={`min-w-44 rounded-xl border py-2 ${
+                      invert ? "bg-black border-white/30" : "bg-bg border-border shadow-sm"
+                    }`}
+                  >
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className={`block px-5 py-2.5 text-sm whitespace-nowrap transition-colors ${
+                            invert
+                              ? "text-white/70 hover:text-white"
+                              : "text-sub hover:text-text"
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -125,6 +165,21 @@ export default function Navbar({ overOpenWall = false }: { overOpenWall?: boolea
                 >
                   {item.label}
                 </Link>
+                {item.children && (
+                  <ul className="mt-3 ml-4 pl-4 border-l border-border flex flex-col gap-3">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className="text-sm text-sub hover:text-text transition-colors"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

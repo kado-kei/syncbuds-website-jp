@@ -130,14 +130,14 @@ export default function PartnersPage() {
                 オンラインキャリアセミナー「海外経験を、仕事に変える。」
               </h4>
               <p className="text-sm text-sub/80 mb-4 tracking-wide">
-                2026年6月7日開催 / 参加確定16名
+                2026年6月7日開催
               </p>
               <p className="text-sub text-base leading-relaxed mb-4">
                 Robert Walters Japan のグローバルキャリアコンサルタントを招き、
                 海外経験を帰国後のキャリアにどうつなげるかをテーマに実施しました。
               </p>
               <p className="text-sub text-base leading-relaxed">
-                参加者は社会人のワーキングホリデー層が50%、Co-op留学生と正規留学生がそれぞれ18.8%。
+                参加者は社会人のワーキングホリデー層を中心に、Co-op留学生や正規留学生も参加しました。
                 申込時に最も多く挙がった悩みは「帰国後のキャリア」で、
                 次いで「Co-opの就活」「英語力への不安」でした。
               </p>
@@ -180,6 +180,23 @@ export default function PartnersPage() {
                 </li>
               ))}
             </ul>
+          </section>
+
+          <section className="mb-28">
+            <h2 className="text-xs text-sub uppercase tracking-[0.2em] mb-6 font-sans">
+              For Education
+            </h2>
+            <div className="bg-surface rounded-2xl p-8">
+              <h3 className="font-sans text-2xl font-bold text-text mb-3">
+                留学・教育機関の皆さまへ
+              </h3>
+              <p className="text-sub text-base leading-relaxed mb-8">
+                学校・カレッジの皆さま向けに、留学生の挑戦へ一緒に関わる形をまとめたページです。
+              </p>
+              <Link href="/partners/education" className="btn-outline text-base !px-8 !py-4">
+                教育機関の方はこちら <span>→</span>
+              </Link>
+            </div>
           </section>
 
           <section className="pt-16 border-t border-border text-center">
